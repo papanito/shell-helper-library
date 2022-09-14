@@ -4,7 +4,12 @@ Contains a collection for useful functions and aliases. The files
 
 ## Usage
 
-1. Declare `SHELL_HELPER_LIBRARY`
+1. Declare `SHELL_HELPER_LIBRARY` somewhere in your `.bashrc` or `.zshrc`
+
+   ```
+   export SHELL_HELPER_LIBRARY="$HOME\.shell-helper-library
+   ```
+
 2. Clone this repo to `$SHELL_HELPER_LIBRARY`
 
    ```bash
@@ -18,7 +23,8 @@ Contains a collection for useful functions and aliases. The files
     function loadShellHelperLibray()
     {
     if [ -n "$SHELL_HELPER_LIBRARY" ] && [ -d "$SHELL_HELPER_LIBRARY" ]; then
-        for filename in $(fine $SHELL_HELPER_LIBRARY -name "*.sh" ); do
+        for filename in $(fine
+        d $SHELL_HELPER_LIBRARY -name "*.sh" ); do
             source $filename
         done
     fi
