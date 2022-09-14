@@ -1,7 +1,7 @@
 # @file networking.sh
 # @brief Network/Internet-oriented stuff
 # @description Useful functions to work with network and internet
-.sh
+
 # @brief Network/Internet-oriented stuff
 # @description Useful functions to work with network and internet
 alias bandwidth='dd if=/dev/zero of=/dev/null bs=1M count=32768' # processor / memory bandwidthd? in GB/s
