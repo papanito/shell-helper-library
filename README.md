@@ -1,5 +1,7 @@
 # shell-helper-library
 
+[![Gitlab issues](https://img.shields.io/gitlab/issues/open-raw/papanito/shell-helper-library)](https://gitlab.com/papanito/shell-helper-library/-/issues) [![Gitlab merge requests](https://img.shields.io/gitlab/merge-requests/open/papanito/shell-helper-library)](https://gitlab.com/papanito/shell-helper-library/-/merge_requests) [![GitLab contributors](https://img.shields.io/gitlab/contributors/papanito/shell-helper-library)](https://img.shields.io/gitlab/contributors/papanito/shell-helper-library) [![GitLab](https://img.shields.io/gitlab/license/papanito/shell-helper-library)](https://img.shields.io/gitlab/license/papanito/shell-helper-library)
+
 Contains a collection for useful functions and aliases. The files
 
 ## Usage
