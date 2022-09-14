@@ -350,35 +350,35 @@ function spinner2()
 
 # @description colorize message in shell
 # @arg $1 string text to colorize
-function sh_colormsg()
+function colormsg()
 {
    [ -n "$1" ] && echo -en "${txtcolor}${@}${txtrst}"
 }
 
 # @description colorize and display error message in shell
 # @arg $1 string text to colorize
-function sh_error()
+function error()
 {
    echo -e "${txtred}[ e ] $@ ${txtrst}"
 }
 
 # @description colorize and display info message in shell
 # @arg $1 string text to colorize
-function sh_info()
+function info()
 {
    echo -e "${txtinfo}[ i ] $@ ${txtrst}"
 }
 
 # @description colorize and display success message in shell
 # @arg $1 string text to colorize
-function sh_success()
+function success()
 {
    echo -e "${txtgrn}[ k ] $@ ${txtrst}"
 }
 
 # @description colorize and display message in shell
 # @arg $1 string text to colorize
-function sh_mesg()
+function mesg()
 {
    echo -e "${txtmsg}[ m ] $@ ${txtrst}"
 }
