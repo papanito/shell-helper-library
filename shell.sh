@@ -1,10 +1,10 @@
 # @file shell.sh
-# @brief Terminal functions
-# @description helper functions for the work in the terminal
+ # @description helper functions for the work in the terminal
 
 ##### Color chart
 txtblk='\e[0;30m' # Black - Regular
 txtred='\e[0;31m' # Red
+txtorg='\e[38;05;202m' # Orange
 txtgrn='\e[0;32m' # Green
 txtylw='\e[0;33m' # Yellow
 txtblu='\e[0;34m' # Blue
@@ -374,6 +374,13 @@ function info()
 function success()
 {
    echo -e "${txtgrn}[ k ] $@ ${txtrst}"
+}
+
+# @description colorize and display warning message in shell
+# @arg $1 string text to colorize
+function warning()
+{
+   echo -e "${txtorg}[ k ] $@ ${txtrst}"
 }
 
 # @description colorize and display message in shell
