@@ -1,9 +1,7 @@
-0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
-
+INSTALL_DIR="${0:a:h}"
 function loadShellHelperLibray()
 {
-    for filename in $(find ${0:h} -name "*.sh" ); do
+    for filename in $(find $INSTALL_DIR -name "*.sh" ); do
         source $filename
     done
 }
