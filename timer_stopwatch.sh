@@ -1,11 +1,9 @@
 # @file timer_stopwatch.sh
-# @brief Stopwatch and Countdown Timer
 # @description Helper functions for stopping time or time countdown
 
 # @description simple stopwatch for terminal
 # copyright 2007 - 2010 Christopher Bratusek
-function stopwatch()
-{ 
+stopwatch() { 
    BEGIN=$(date +%s)
    while true; do
       NOW=$(date +%s)
@@ -19,8 +17,7 @@ function stopwatch()
 
 # @description countdown clock
 # @arg $1 int seconds to count
-function countdown()
-{ 
+countdown() { 
    case "$1" in -s) shift ;; *) set $(($1 * 60)) ;; esac
    local S=" "
    for i in $(seq "$1" -1 1); do

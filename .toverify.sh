@@ -3,8 +3,7 @@
 # @arg $1 int value to convert
 # @arg $2 string currency shorthand to convert from
 # @arg $3 string currency shorthand to convert to
-function currency_convert()
-{ 
+currency_convert() { 
     if [ $# -lt 3 ]; then
       echo "convert currencies"
       echo "usage: currency_convert [amount] [crrency from] [currency to]"
@@ -14,8 +13,7 @@ function currency_convert()
     fi
 }
 
-function currency_convert_help()
-{
+currency_convert_help() {
    echo "AED - Emirati Dirham
    AFN - Afghan Afghani
    ALL - Albanian Lek
@@ -191,15 +189,13 @@ function currency_convert_help()
 # @example
 #   translate "hello" es = hola (will auto-detect source language)
 # for a list of language codes: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-function translate()
-{
+translate() {
    wget -qO- "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&q=$1&langpair=%7C${2:-en}" | sed 's/.*{"translatedText":"\([^"]*\)".*/\1\n/'; 
 }
 
 # @description translate a word using Google
 # usage: translate <phrase> <output-language>
-function translate_help()
-{
+translate_help() {
    echo"Language   ISO
    (Afan) Oromo           om
    Abkhazian              ab

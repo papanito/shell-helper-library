@@ -1,19 +1,16 @@
 # @file strings.sh
-# @brief String manipulation
 # @description helper functions for working with strings
 
 # @description converts a string (words, text) to binary"
 # @arg $1 string value to convert
-function string2bin()
-{
+string2bin() {
    perl -nle 'printf "%0*v8b\n"," ",$_'
 }
 
 # @description Convert the first letter into lowercase letters
 # @arg $1 string string to change
 # @exitcode string whhere first letter is lowercase
-function lcfirst()
-{
+lcfirst() {
    if [ -n "$1" ]; then
      perl -e 'print lcfirst('$1')'
    else
@@ -26,8 +23,7 @@ function lcfirst()
 # @exitcode string w/o whitespaces at the beginning of the string
 # @example
 #    echo "   That is a sentinece" | rtrim
-function ltrim()
-{
+ltrim() {
       if [ -n "$1" ]; then
          echo $1 | sed 's/^[[:space:]]*//g'
       else
@@ -40,8 +36,7 @@ function ltrim()
 # @exitcode string w/o whitespaces at the end
 # @example
 #    echo "That is a sentinece " | rtrim
-function rtrim()
-{
+rtrim() {
       if [ -n "$1" ]; then
          echo $1 | sed 's/[[:space:]]*$//g'
       else
@@ -55,8 +50,7 @@ function rtrim()
 # @exitcode shortened string
 # @example
 #      strim averylongstring 2
-function strim()
-{
+strim() {
    local string="$1"
    local length=${2:-30}
    [ "${#string}" -gt ${length} ] && string="${string:0:${length}}..."
@@ -65,8 +59,7 @@ function strim()
 
 # @description Convert all alphabetic characters to lowercase
 # @arg $1 string string to convert
-function strtolower()
-{
+strtolower() {
       if [ -n "$1" ]; then
          echo $1 | tr '[:upper:]' '[:lower:]'
       else
@@ -76,8 +69,7 @@ function strtolower()
 
 # @description Convert all alphabetic characters converted to uppercase
 # @arg $1 string string to convert
-function strtoupper()
-{
+strtoupper() {
    if [ -n "$1" ]; then
       echo $1 | tr '[:lower:]' '[:upper:]'
    else
@@ -89,8 +81,7 @@ function strtoupper()
 # @arg $1 string string to convert
 # @example
 #     echo " That is a sentinece " | trim
-function trim()
-{
+trim() {
    if [ -n "$1" ]; then
       echo $1 | sed 's/^[[:space:]]*//g' | sed 's/[[:space:]]*$//g'
    else
@@ -100,8 +91,7 @@ function trim()
 
 # @description Convert the first letter into uppercase letters
 # @aeg $1 string string to convert
-function strucfirst()
-{
+strucfirst() {
       if [ -n "$1" ]; then
      perl -e 'print ucfirst('$1')'
       else
@@ -111,8 +101,7 @@ function strucfirst()
 
 # @description Converts first letter of each word within a string into an uppercase, all other to lowercase
 # @aeg $1 string string to convert
-function strucwords()
-{
+strucwords() {
       local string="$*"
       for word in $string; do
         # Get the first character with cut and convert them into uppercase.

@@ -1,12 +1,10 @@
 # @filename checksum.sh
-# @brief Calculate checksums
 # @description Helper functions for checksumm calculation
 
 # @description Calculate checksum of a file
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 string filename
-function checksum()
-{ 
+checksum() { 
    action=$1
    shift
    if [[ ($action == "-c" || $action == "--check") && $1 == *.* ]]; then

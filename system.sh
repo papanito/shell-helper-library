@@ -1,5 +1,4 @@
 # @file system.sh
-# @brief work with system, os and hardware
 # @description helper functions to get system info, set system settings incl. hardware stuff
 
 # @section Systemd service
@@ -7,43 +6,37 @@
 
 # @description start a service
 # @arg $1 string name of service
-function start()
-{
+start() {
    sudo systemctl start $1.service
 }
 
 # @description stop a service
 # @arg $1 string name of service
-function stop()
-{
+stop() {
    sudo systemctl stop $1.service
 }
 
 # @description query status of a service
 # @arg $1 string name of service
-function status()
-{
+status() {
    sudo systemctl status $1.service
 }
 
 # @description query status of a service
 # @arg $1 string name of service
-function statusg()
-{
+statusg() {
    sudo systemctl | grep $1
 }
 
 # @description enable a service
 # @arg $1 string name of service
-function senable()
-{
+senable() {
    sudo systemctl status $1.service
 }
 
 # @desciption list available systemd services
 # @noargs
-function services()
-{
+services() {
    ll /usr/lib/systemd/system
    ll /etc/system/systemd
 }
@@ -63,8 +56,7 @@ alias free='free -m' # RAM and SWAP detail in MBs
 
 # @description show load of the battery
 # copyright 2007 - 2010 Christopher Bratusek
-function show_battery_load()
-{
+show_battery_load() {
    case $1 in
       *acpi )
          check_opt acpi show_battery_load::acpi
@@ -116,8 +108,7 @@ function show_battery_load()
 
 # @description show infromation about your system
 # copyright 2007 - 2010 Christopher Bratusek
-function system_infos()
-{
+system_infos() {
    case $1 in
       *cpu)
          echo -e "${ewhite}CPU:\n"

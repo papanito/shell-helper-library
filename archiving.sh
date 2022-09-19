@@ -1,11 +1,9 @@
 # @file archiving.sh
-# @brief Work with archives
 # @description helper functions to work with archives
 
 # @description archive wrapper to automatically select the right command for the given archive type
 # @arg $1 string name fo the archive to extract
-function extract()
-{ 
+extract() { 
    local e=0 i c
    for i; do
       if [[ -f $i && -r $i ]]; then
@@ -38,8 +36,7 @@ function extract()
 # @description Pull a single file out of a .tar.gz
 # @arg $1 string name fo the archive
 # @arg $1 string name fo the file to extract from archive
-function pullout()
-{ 
+pullout() { 
    if [ $# -ne 2 ]; then
       echo "need proper arguments:"
       echo "pullout [file] [archive.tar.gz]"
@@ -58,8 +55,7 @@ function pullout()
 }
 
 # @description Sets the compression level for file-roller
-function compression_level()
-{ 
+compression_level() { 
    echo -n "Please enter the number for the desired compression level for file-roller:
 
    (1) very_fast
@@ -98,20 +94,16 @@ function compression_level()
 
 # @description Creates a tar archive from directory
 # @arg $1 string directory to archive
-function mktar()
-{  tar cvf "${1%%/}-$(date +%Y%m%d).tar" "${1%%/}/"; }
+mktar() {  tar cvf "${1%%/}-$(date +%Y%m%d).tar" "${1%%/}/"; }
 
 # @description Creates a bz archive from directory
 # @arg $1 string directory to archive
-function mktbz()
-{  tar cvjf "${1%%/}-$(date +%Y%m%d).tar.bz2" "${1%%/}/"; }
+mktbz() {  tar cvjf "${1%%/}-$(date +%Y%m%d).tar.bz2" "${1%%/}/"; }
 
 # @description Creates a gz archive from directory
 # @arg $1 string directory to archive
-function mktgz()
-{  tar cvzf "${1%%/}-$(date +%Y%m%d).tar.gz" "${1%%/}/"; }
+mktgz() {  tar cvzf "${1%%/}-$(date +%Y%m%d).tar.gz" "${1%%/}/"; }
 
 # @description Creates a zip archive from directory
 # @arg $1 string directory to archive
-function mkzip()
-{  zip -r "$1"-$(date +%Y%m%d).zip "$1"; }
+mkzip() {  zip -r "$1"-$(date +%Y%m%d).zip "$1"; }

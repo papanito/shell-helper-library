@@ -1,24 +1,20 @@
 # @file math.sh
-# @brief Mathematical functions
 # @description helper functions for mathematics and number manipulation
 
 # @description list of numbers with equal width i.e. number with 0-prefixed
 # @arg $1 int numbers to print
-function nseq()
-{
+nseq() {
    seq -w 0 "$1"
 }
 
 # @description finding the square root of numbers
 # @arg $1 int numbers to use for calc
-function sqrt()
-{
+sqrt() {
    echo "sqrt ("$1")" | bc -l
 }
 
 # @description trigonmetry calculations with angles
-function trig-angle()
-{
+trig-angle() {
    echo "Enter angle in degree: "
    read deg
    # Note: Pi calculation
@@ -40,8 +36,7 @@ function trig-angle()
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 number number to round
 # @arg $2 int digits to round to
-function round()
-{
+round() {
    if [[ $1 ]]; then
       if [[ $2 ]]; then
          echo "$(printf %.${2}f $1)"
@@ -54,8 +49,7 @@ function round()
 # @description convert arabic to roman numerals
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int number to convert
-function arabic2roman()
-{
+arabic2roman() {
    echo $1 | sed -e 's/1...$/M&/;s/2...$/MM&/;s/3...$/MMM&/;s/4...$/MMMM&/
    s/6..$/DC&/;s/7..$/DCC&/;s/8..$/DCCC&/;s/9..$/CM&/
    s/1..$/C&/;s/2..$/CC&/;s/3..$/CCC&/;s/4..$/CD&/;s/5..$/D&/
@@ -70,15 +64,13 @@ function arabic2roman()
 # Computes a columns average in a file
 # @arg $1 int column number
 # @arg $2 string optional pattern
-function avg()
-{
+avg() {
    awk "/$2/{sum += \$$1; lc += 1;} END {printf \"Average over %d lines: %f\n\", lc, sum/lc}"
 }
 
 # @description the notorious "hailstone" or Collatz series.
 # @arg $1 int seed number
-function collatz()
-{
+collatz() {
    # get the integer "seed" from the command-line to generate the integer "result"
    # if NUMBER is even, divide by 2, or if odd, multiply by 3 and add 1
    # the theory is that every sequence eventually settles down to repeating "4,2,1..." cycles
@@ -116,8 +108,7 @@ function collatz()
 # random wanderings of tiny particles in fluid, as they are buffeted
 # by random currents and collisions (colloquially known as "Drunkard's Walk")
 # Author: Mendel Cooper
-function brownian()
-{
+brownian() {
    PASSES=500                  #  Number of particle interactions / marbles.
    ROWS=10                     #  Number of "collisions" (or horiz. peg rows).
    RANGE=3                     #  0 - 2 output range from $RANDOM.
@@ -170,8 +161,7 @@ function brownian()
    let "POS += $SHIFT"             # Shift "zero position" to center.
    (( Slots[$POS]++ ))             # DEBUG: echo $POS
      }
-   function Run()
-{                # Outer loop.
+   function Run() {                # Outer loop.
    p=0
    while [ "$p" -lt "$PASSES" ]
    do
@@ -187,8 +177,7 @@ function brownian()
 }
 
 # flip a single coin 1000 times and show results
-function coin-flip()
-{
+coin-flip() {
    SEED=$"(head -1 /dev/urandom | od -N 1 | awk '{ print $2 }')"
    RANDOM=$SEED
    SIDES=2             # A coin has 2 sides.
@@ -226,8 +215,7 @@ function coin-flip()
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 string [optional] `-L` or `-r` 
 # @arg $2 int value
-function random()
-{
+random() {
    if [[ $1 == -l ]]; then
       echo $(cat /dev/urandom | tr -cd '[:digit:]' | head -c ${2-5})
    elif [[ $1 == -r ]]; then
@@ -241,8 +229,7 @@ function random()
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int base number
 # @arg $2 int optional power (default is 2)
-function power()
-{ 
+power() { 
    if [[ $1 ]]; then
       if [[ $2 ]]; then
          echo "$1 ^ $2" | bc
@@ -253,8 +240,7 @@ function power()
 }
 
 # @description calcutale factorial of an integer
-function factorial()
-{ 
+factorial() { 
    echo "Enter an integer: "
    read n
    # Below we define the factorial function in bc syntax
@@ -273,8 +259,7 @@ function factorial()
 }
 
 # @description finding logs for numbers
-function math-log()
-{ 
+math-log() { 
    echo "Enter value: "
    read x
    echo "Natural Log: ln($x) :"

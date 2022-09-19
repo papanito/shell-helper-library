@@ -11,7 +11,6 @@ alias screensaver='for ((;;)); do echo -ne "\033[$((1+RANDOM%LINES));$((1+RANDOM
 
 # @description pretend to be busy in office to enjoy a cup of coffee
 # @noargs
-function grepcolor()
-{
+grepcolor() {
    cat /dev/urandom | hexdump -C | grep --color=auto "ca fe"
 }

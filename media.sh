@@ -1,5 +1,4 @@
 # @file media.sh
-# @brief work with media (images, videos, ..)
 # @description helper to work with media (images, videos, ..)
 
 # @section Youtube
@@ -13,8 +12,7 @@ alias ytdl-mp3='youtube-dl -x --audio-format mp3 $@'
 # If you skip this part: -density 300x300, you'll get a very lo-res image
 # @arg $1 string input file
 # @arg $2 string output file
-function pdf2png()
-{
+pdf2png() {
    convert -density 300x300 $1 $2
 }
 
@@ -24,8 +22,7 @@ function pdf2png()
 # @arg $1 int first page of the range to extract
 # @arg $2 int last page of the range to extract
 # @arg $3 string the input file
-function pdfpextr()
-{
+pdfpextr() {
     gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
        -dFirstPage=${1} \
        -dLastPage=${2} \
@@ -36,8 +33,7 @@ function pdfpextr()
 # @description Reduce PDF
 # @arg $1 string file to Reduce
 # @arg $2 int dpi
-function pdfreduce()
-{
+pdfreduce() {
    gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite \
       -dCompatibilityLevel=1.4 \
       -dDownsampleColorImages=true \
@@ -51,8 +47,7 @@ function pdfreduce()
 }
 
 # @description batch resize image
-function resizeimg()
-{
+resizeimg() {
    NAME_="resizeimg"
    HTML_="batch resize image"
    PURPOSE_="resize bitmap image"
@@ -68,8 +63,7 @@ function resizeimg()
    SHELL_="bash"
    DISTRIBUTE_="yes"
    # This program is distributed under the terms of the GNU General Public License
-   usage ()
-{
+   usage () {
    echo >&2 "$NAME_ $VERSION_ - $PURPOSE_
    Usage: $SYNOPSIS_
    Requires: $REQUIRES_
@@ -115,8 +109,7 @@ function resizeimg()
 }
 
 # @description Optimize PNG files
-function pngoptim()
-{
+pngoptim() {
    NAME_="pngoptim"
    HTML_="optimize png files"
    PURPOSE_="reduce the size of a PNG file if possible"
@@ -183,8 +176,7 @@ function pngoptim()
 # @description Convert text file to pdf
 # Requires:txt2html python-pisa
 # @arg $1 string input textfile
-function txt2pdf()
-{ 
+txt2pdf() { 
    xhtml2pdf -b "${1%.*}" < <(txt2html "$1");
 }
 
@@ -192,7 +184,6 @@ function txt2pdf()
 # @arg $1 int percentage of image resize
 # @arg $2 string input image file
 # @arg $3 string output image file
-function image_resize()
-{
+image_resize() {
    convert -sample "$1"%x"$1"% "$2" "$3"
 }

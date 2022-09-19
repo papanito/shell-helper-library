@@ -33,4 +33,26 @@ Contains a collection for useful functions and aliases. The files
     if [ -f $shell_helper ]; then . $shell_helper ; fi
     ```
 
-[ZI]: https://github.com/z-shell/zi
+[ZI]: https://github.com/z-shell/zi# shell.sh
+
+## Content
+
+* [archiving.sh](./archiving.md)
+* [checksum.sh](./checksum.md)
+* [conversion.sh](./conversion.md)
+* [datetime.sh](./datetime.md)
+* [debian.sh](./debian.md)
+* [filesfolders.sh](./filesfolders.md)
+* [find.sh](./find.md)
+* [fun.sh](./fun.md)
+* [math.sh](./math.md)
+* [media.sh](./media.md)
+* [networking.sh](./networking.md)
+* [processes.sh](./processes.md)
+* [python.sh](./python.md)
+* [security.sh](./security.md)
+* [shell.sh](./shell.md)
+* [strings.sh](./strings.md)
+* [system.sh](./system.md)
+* [timer_stopwatch.sh](./timer_stopwatch.md)
+* [translate.sh](./translate.md)

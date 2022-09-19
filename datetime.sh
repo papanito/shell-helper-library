@@ -25,23 +25,20 @@ alias weeknum='date +%V' # perl one-liner to get the current week number (ex. 03
 
 # @description convert normal to unix
 # @arg $1 string normlatime
-function normal2unix()
-{
+normal2unix() {
     echo "${@}" | awk '{print mktime($0)}';
 }
 
 # @description convert unix to normal
 # @arg $1 string unixtime
-function unix2normal()
-{
+unix2normal() {
     echo $1 | awk '{print strftime("%Y-%m-%d %H:%M:%S",$1)}';
 }
 
 # @description convert seconds to minutes, hours, days, and etc.
 # inputs a number of seconds, outputs a string like "2 minutes, 1 second"
 # @arg $1 int number of seconds
-function sec2all()
-{
+sec2all() {
     local millennia=$((0))
     local centuries=$((0))
     local years=$((0))
@@ -85,8 +82,7 @@ function sec2all()
 # @description formats a time unit into a string
 # @arg $1 int integer count of units: 0, 6, etc
 # @arg $2 string unit name: "hour", "minute", etc
-function seconds-convert-part()
-{
+seconds-convert-part() {
     local unit=$1
     local name=$2
     if [ $unit -ge 2 ]; then

@@ -1,5 +1,4 @@
 # @file processes.sh
-# @brief Process Management
 # @description helper functions for process management
 
 alias hiddenpnps='unhide (proc|sys|brute)' # forensic tool to find hidden processes and ports
@@ -19,8 +18,7 @@ alias top_='xtitle Processes on $HOST && top' # uses the function 'xtitle'
 # @description Kill a process by name
 # @arg $1 string name of process to kill
 # @arg $2 int SIGNAL to send to process
-function killps()
-{
+killps() {
    local pid pname sig="-TERM" # default signal
    if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
       echo "Usage: killps [-SIGNAL] pattern"
@@ -37,8 +35,7 @@ function killps()
 
 # @description Count processes that are running
 # copyright 2007 - 2010 Christopher Bratusek
-function count_processes()
-{
+count_processes() {
    case $1 in
    *help)
       echo -e "\n${ewhite}Usage:"

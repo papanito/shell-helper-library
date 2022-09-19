@@ -8,8 +8,7 @@
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int number of characters; defaults to 32
 # @arg $2 int include special characters; 1 = yes, 0 = no; defaults to 1
-function randompw()
-{
+randompw() {
    if [[ $2 == "!" ]]; then
       echo $(cat /dev/random | tr -cd '[:graph:]' | head -c ${1:-32})
    else
@@ -18,14 +17,12 @@ function randompw()
 }
 
 # @description generate a unique and secure password for every website that you login to
-function sitepass()
-{
+sitepass() {
    echo -n "$@" |  md5sum | sha1sum | sha224sum | sha256sum | sha384sum | sha512sum | gzip - | strings -n 1 | tr -d "[:space:]"  | tr -s '[:print:]' | tr '!-~' 'P-~!-O' | rev | cut -b 2-11; history -d $(($HISTCMD-1));
 }
 
 # @description generates a unique and secure password with SALT for every website that you login to
-function sitepass2()
-{
+sitepass2() {
    salt="this_salt";pass=`echo -n "$@"`;for i in {1..500};do pass=`echo -n $pass$salt|sha512sum`;done;echo$pass|gzip -|strings -n 1|tr -d "[:space:]"|tr -s '[:print:]' |tr '!-~' 'P-~!-O'|rev|cut -b 2-15;history -d $(($HISTCMD-1));
 }
 
@@ -36,8 +33,7 @@ function sitepass2()
 # @example
 #  encrypt filename
 #  decrypt filename
-function encrypt()
-{
+encrypt() {
    # Author: Martin Langasek <cz4160@gmail.com>
    case $LANG in
      * )
@@ -83,8 +79,7 @@ alias decrypt='encrypt'
 
 # @description rot13 ("rotate alphabet 13 places" Caesar-cypher encryption)
 # @arg $1 string text to encypher
-function rot13()
-{
+rot13() {
     if [ $# -lt 1 ] || [ $# -gt 1 ]; then
       echo "Seriously?  You don't know what rot13 does?"
     else
@@ -94,8 +89,7 @@ function rot13()
 
 # @description rot47 ("rotate ASCII characters from '!" to '~' 47 places" Caesar-cypher encryption)
 # @arg $1 string text to encypher
-function rot47()
-{
+rot47() {
     if [ $# -lt 1 ] || [ $# -gt 1 ]; then
       echo "Seriously?  You don't know what rot47 does?"
     else
@@ -108,15 +102,14 @@ function rot47()
 # @description OpenPGP/GPG pubkeys stuff (for Launchpad / etc.
 
 # @description to export public OpenPGP keys to a file for safe keeping and potential restoration
-function exportmykeys() 
+exportmykeys() 
 { 
    exportmykeys_private && exportmykeys_public
 }
 
 # @description to export private OpenPGP keys to a file for safe keeping and potential restoration
 # using 'mykeys', put the appropriate GPG key after you type this function
-function exportmykeys_private()
-{
+exportmykeys_private() {
    gpg --list-secret-keys
    echo -n "Please enter the appropriate private key...
    Look for the line that starts something like "sec 1024D/".
@@ -131,8 +124,7 @@ function exportmykeys_private()
 
 # @description to export public OpenPGP keys to a file for safe keeping and potential restoration
 # using 'mykeys', put the appropriate GPG key after you type this function
-function exportmykeys_public()
-{
+exportmykeys_public() {
    gpg --list-keys
    echo -n "Please enter the appropriate public key...
    Look for line that starts something like "pub 1024D/".
@@ -156,8 +148,7 @@ alias gpg_publishmykeys='gpg --keyserver hkp://keyserver.ubuntu.com --send-keys'
 
 # @description to restore your public and private OpenPGP keys
 # from Public_Key-public.key and Private_Keys-private.key files:
-function gpg_restoremykeys()
-{
+gpg_restoremykeys() {
    echo -n "Please enter the full path to Public keys (spaces are fine)...
 
    Example: '/home/(your username)/Public_Key-public.key'...
@@ -176,8 +167,7 @@ function gpg_restoremykeys()
 }
 
 # to setup new public and private OpenPGP keys
-function gpg_setupmykeys()
-{
+gpg_setupmykeys() {
    # Generate new key
    gpg --gen-key
    # Publish new key to Ubuntu keyserver

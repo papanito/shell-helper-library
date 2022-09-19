@@ -1,6 +1,5 @@
 
 # @file conversion.sh
-# @brief convert stuff
 # @description helper functions to convert to any other format
 
 # @section ascii and numeric conversion
@@ -8,16 +7,14 @@
 
 # @description Output an ASCII character given its decimal equivalent
 # @arg $1 int decimal value to convert
-function chr()
-{
+chr() {
    printf \\$(($1/64*100+$1%64/8*10+$1%8))
 }
 
 # @description convert ascii to another format
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2all()
-{
+asc2all() {
    if [[ $1 ]]; then
       echo "ascii $1 = binary $(asc2bin $1)"
       echo "ascii $1 = octal $(asc2oct $1)"
@@ -31,8 +28,7 @@ function asc2all()
 # @description convert ascii to binary
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2bin()
-{
+asc2bin() {
    if [[ $1 ]]; then
       echo "obase=2 ; $(asc2dec $1)" | bc
    fi
@@ -41,8 +37,7 @@ function asc2bin()
 # @description convert ascii to base64
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2b64()
-{
+asc2b64() {
    if [[ $1 ]]; then
       echo "obase=64 ; $(asc2dec $1)" | bc
    fi
@@ -51,8 +46,7 @@ function asc2b64()
 # @description convert ascii to base32
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2b32()
-{
+asc2b32() {
    if [[ $1 ]]; then
       echo "obase=32 ; $(asc2dec $1)" | bc
    fi
@@ -61,8 +55,7 @@ function asc2b32()
 # @description convert ascii to decimal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2dec()
-{
+asc2dec() {
    if [[ $1 ]]; then
       printf '%d\n' "'$1'"
    fi
@@ -71,8 +64,7 @@ function asc2dec()
 # @description convert ascii to hex
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2hex()
-{
+asc2hex() {
    if [[ $1 ]]; then
       echo "obase=16 ; $(asc2dec $1)" | bc
    fi
@@ -81,8 +73,7 @@ function asc2hex()
 # @description convert ascii to octal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string text to convert
-function asc2oct()
-{
+asc2oct() {
    if [[ $1 ]]; then
       echo "obase=8 ; $(asc2dec $1)" | bc
    fi
@@ -94,8 +85,7 @@ function asc2oct()
 # @description convert binary value to any other format
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2all()
-{
+bin2all() {
    if [[ $1 ]]; then
       echo "binary $1 = octal $(bin2oct $1)"
       echo "binary $1 = decimal $(bin2dec $1)"
@@ -109,8 +99,7 @@ function bin2all()
 # @description convert binary value to ascii
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2asc()
-{
+bin2asc() {
    if [[ $1 ]]; then
       echo -e "\0$(printf %o $((2#$1)))"
    fi
@@ -119,8 +108,7 @@ function bin2asc()
 # @description convert binary value to base64
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2b64()
-{
+bin2b64() {
    if [[ $1 ]]; then
       echo "obase=64 ; ibase=2 ; $1" | bc
    fi
@@ -129,8 +117,7 @@ function bin2b64()
 # @description convert binary value to base32
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2b32()
-{
+bin2b32() {
    if [[ $1 ]]; then
       echo "obase=32 ; ibase=2 ; $1 " | bc
    fi
@@ -139,8 +126,7 @@ function bin2b32()
 # @description convert binary value to decimal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2dec()
-{
+bin2dec() {
    if [[ $1 ]]; then
       echo $((2#$1))
    fi
@@ -149,8 +135,7 @@ function bin2dec()
 # @description convert binary value to hex
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2hex()
-{
+bin2hex() {
    if [[ $1 ]]; then
       echo "obase=16 ; ibase=2 ; $1" | bc
    fi
@@ -159,8 +144,7 @@ function bin2hex()
 # @description convert binary value to octal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string binary value to convert
-function bin2oct()
-{
+bin2oct() {
    if [[ $1 ]]; then
       echo "obase=8 ; ibase=2 ; $1" | bc
    fi
@@ -171,13 +155,11 @@ function bin2oct()
 
 # @description convert hexadecimal numbers to decimals
 # @arg 1 string hexadecimal value to convert
-function dec2hex()
-{  printf "%d\n" $1; }
+dec2hex() {  printf "%d\n" $1; }
 # @description convert hexadecimal value to any other format
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2all()
-{ 
+hex2all() { 
    if [[ $1 ]]; then
       echo "hexadecimal $1 = binary $(hex2bin $1)"
       echo "hexadecimal $1 = octal $(hex2oct $1)"
@@ -191,8 +173,7 @@ function hex2all()
 # @description convert hexadecimal value to ascii
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2asc()
-{ 
+hex2asc() { 
    if [[ $1 ]]; then
       echo -e "\0$(printf %o $((16#$1)))"
    fi
@@ -201,8 +182,7 @@ function hex2asc()
 # @description convert hexadecimal value to binary
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2bin()
-{ 
+hex2bin() { 
    if [[ $1 ]]; then
       echo "obase=2 ; ibase=16 ; $1" | bc
    fi
@@ -211,8 +191,7 @@ function hex2bin()
 # @description convert hexadecimal value to base64
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2b64()
-{ 
+hex2b64() { 
    if [[ $1 ]]; then
       echo "obase=64 ; ibase=16 ; $1" | bc
    fi
@@ -221,8 +200,7 @@ function hex2b64()
 # @description convert hexadecimal value to base32
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2b32()
-{ 
+hex2b32() { 
    if [[ $1 ]]; then
       echo "obase=32 ; ibase=16 ; $1" | bc
    fi
@@ -231,8 +209,7 @@ function hex2b32()
 # @description convert hexadecimal value to decimal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2dec()
-{ 
+hex2dec() { 
    if [[ $1 ]]; then
       echo $((16#$1))
    fi
@@ -241,8 +218,7 @@ function hex2dec()
 # @description convert hexadecimal value to octal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string hexadecimal value to convert
-function hex2oct()
-{ 
+hex2oct() { 
    if [[ $1 ]]; then
       echo "obase=8 ; ibase=16 ; $1" | bc
    fi
@@ -253,8 +229,7 @@ function hex2oct()
 
 # @description convert decimals to hexadecimal numbers
 # @arg 1 string decimal value to convert
-function hex()
-{  printf "0x%08x\n" $1; }
+hex() {  printf "0x%08x\n" $1; }
 
 # @section decimal conversion
 # @description convert octal value to another format 
@@ -262,8 +237,7 @@ function hex()
 # @description convert decimal value to any other format
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2all()
-{ 
+oct2all() { 
    if [[ $1 ]]; then
       echo "octal $1 = binary $(oct2bin $1)"
       echo "octal $1 = decimal $(oct2dec $1)"
@@ -277,8 +251,7 @@ function oct2all()
 # @description convert decimal value to ascii
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2asc()
-{ 
+oct2asc() { 
    if [[ $1 ]]; then
       echo -e "\0$(printf %o $((8#$1)))"
    fi
@@ -287,8 +260,7 @@ function oct2asc()
 # @description convert decimal value to binary
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2bin()
-{ 
+oct2bin() { 
    if [[ $1 ]]; then
       echo "obase=2 ; ibase=8 ; $1" | bc
    fi
@@ -297,8 +269,7 @@ function oct2bin()
 # @description convert decimal value to base64
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2b64()
-{ 
+oct2b64() { 
    if [[ $1 ]]; then
       echo "obase=64 ; ibase=8 ; $1" | bc
    fi
@@ -307,8 +278,7 @@ function oct2b64()
 # @description convert decimal value to base32
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2b32()
-{ 
+oct2b32() { 
    if [[ $1 ]]; then
       echo "obase=32 ; ibase=8 ; $1" | bc
    fi
@@ -317,8 +287,7 @@ function oct2b32()
 # @description convert decimal value to decimal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2dec()
-{ 
+oct2dec() { 
    if [[ $1 ]]; then
       echo $((8#$1))
    fi
@@ -327,8 +296,7 @@ function oct2dec()
 # @description convert decimal value to hexa
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string octet value to convert
-function oct2hex()
-{ 
+oct2hex() { 
    if [[ $1 ]]; then
       echo "obase=16 ; ibase=8 ; $1" | bc
    fi
@@ -337,8 +305,7 @@ function oct2hex()
 # @description convert decimal value to any other format
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2all()
-{ 
+dec2all() { 
    if [[ $1 ]]; then
       echo "decimal $1 = binary $(dec2bin $1)"
       echo "decimal $1 = octal $(dec2oct $1)"
@@ -352,8 +319,7 @@ function dec2all()
 # @description convert decimal value to ascii
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2asc()
-{ 
+dec2asc() { 
    if [[ $1 ]]; then
       echo -e "\0$(printf %o 97)"
    fi
@@ -362,8 +328,7 @@ function dec2asc()
 # @description convert decimal value to binary
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2bin()
-{ 
+dec2bin() { 
    if [[ $1 ]]; then
       echo "obase=2 ; $1" | bc
    fi
@@ -372,8 +337,7 @@ function dec2bin()
 # @description convert decimal value to base64
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2b64()
-{ 
+dec2b64() { 
    if [[ $1 ]]; then
       echo "obase=64 ; $1" | bc
    fi
@@ -382,8 +346,7 @@ function dec2b64()
 # @description convert decimal value to base32
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2b32()
-{ 
+dec2b32() { 
    if [[ $1 ]]; then
       echo "obase=32 ; $1" | bc
    fi
@@ -392,8 +355,7 @@ function dec2b32()
 # @description convert decimal value to hexadecimal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2hex()
-{ 
+dec2hex() { 
    if [[ $1 ]]; then
       echo "obase=16 ; $1" | bc
    fi
@@ -402,8 +364,7 @@ function dec2hex()
 # @description convert decimal value to octal
 # copyright 2007 - 2010 Christopher Bratusek
 # @arg 1 string decimal value to convert
-function dec2oct()
-{ 
+dec2oct() { 
    if [[ $1 ]]; then
       echo "obase=8 ; $1" | bc
    fi
@@ -414,8 +375,7 @@ function dec2oct()
 # @example:
 #   dec2text 1234 -> one thousand two hundred thirty-four
 # @arg $1 int value to convert to string
-function dec2text()
-{ 
+dec2text() { 
    prog=$(echo "$0" | sed -e 's/[^\/]*\///g')
    garbage=$(echo "$*" | sed -e 's/[0-9,.]//g')
    if test ".$garbage" != "."; then
@@ -535,8 +495,7 @@ function dec2text()
 # @example
 #   dec2text 1234 -> one two three four
 # @arg $1 int value to convert to string
-function dec2text_()
-{ 
+dec2text_() { 
    # This script is part of nixCraft shell script collection (NSSC)
    # Visit http://bash.cyberciti.biz/ for more information.
    n=$1
@@ -569,8 +528,7 @@ function dec2text_()
 # @description convert C to F
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree C to convert
-function cel2fah()
-{
+cel2fah() {
    if [[ $1 ]]; then
       echo "scale=2; $1 * 1.8  + 32" | bc
    fi
@@ -579,8 +537,7 @@ function cel2fah()
 # @description convert C to K
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree C to convert
-function cel2kel()
-{
+cel2kel() {
    if [[ $1 ]]; then
       echo "scale=2; $1 + 237.15" | bc
    fi
@@ -589,8 +546,7 @@ function cel2kel()
 # @description convert F to C
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree F to convert
-function fah2cel()
-{
+fah2cel() {
    if [[ $1 ]]; then
       echo "scale=2 ; ( $1 - 32  ) / 1.8" | bc
    fi
@@ -599,8 +555,7 @@ function fah2cel()
 # @description convert F to K
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree F to convert
-function fah2kel()
-{
+fah2kel() {
    if [[ $1 ]]; then
       echo "scale=2; ( $1 + 459.67 ) / 1.8 " | bc
    fi
@@ -609,8 +564,7 @@ function fah2kel()
 # @description convert K to C
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree K to convert
-function kel2cel()
-{
+kel2cel() {
    if [[ $1 ]]; then
       echo "scale=2; $1 - 273.15" | bc
    fi
@@ -619,8 +573,7 @@ function kel2cel()
 # @description convert K to F
 # Copyright 2007 - 2010 Christopher Bratusek
 # @arg $1 int degree K to convert
-function kel2fah()
-{
+kel2fah() {
    if [[ $1 ]]; then
       echo "scale=2; $1 * 1.8 - 459,67" | bc
    fi

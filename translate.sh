@@ -1,15 +1,12 @@
 # @file translate.sh
-# @brief translation of text
 # @description helper functions to translate text via console -- to be verified
 
 # file translate.sh
-# @brief Translation and Dictionary
 # @description helper functions for word definitions and translations
 
 # @description Lookup a word with dict.org
 # @arg $# string word to lookup
-function dic()
-{ 
+dic() { 
    curl dict://dict.org/d:"$@" ; 
 }
 
@@ -17,8 +14,7 @@ function dic()
 # @arg $1 string to find
 # @arg $2 string Search type
 # @arg $3 string db
-function ref()
-{
+ref() {
     if [[ -z $3 ]]; then
       curl dict://dict.org/m:${1}:english:${2};
     else
@@ -28,16 +24,14 @@ function ref()
 
 # @description Lookup a word with dict.org in WordNet
 # @arg $1 string word to lookup
-function wordnet()
-{ 
+wordnet() { 
    curl dict://dict.org/d:${1}:wn;
 }
 
 # @description define a word
 # @example
 #   define dog
-function define()
-{
+define() {
    local LNG=$(echo $LANG | cut -d '_' -f 1)
    local CHARSET=$(echo $LANG | cut -d '.' -f 2)
    lynx -accept_all_cookies -dump -hiddenlinks=ignore -nonumbers -assume_charset="$CHARSET" -display_charset="$CHARSET" "http://www.google.com/search?hl=${LNG}&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -C 2 -A 5 -w "*" > /tmp/define
@@ -54,14 +48,12 @@ function define()
 }
 
 # @description detect language of a string
-function detectlanguage()
-{ 
+detectlanguage() { 
    curl -s "http://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q=$@" | sed 's/{"responseData": {"language":"\([^"]*\)".*/\1\n/'; 
 }
 
 
 # Google text-to-speech in mp3/wav format
-function say()
-{ 
+say() { 
    mplayer -user-agent Mozilla "http://translate.google.com/translate_tts?tl=en&q=$(echo $* | sed 's#\ #\+#g')" > /dev/null 2>&1 ;
 }
