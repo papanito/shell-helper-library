@@ -8,7 +8,7 @@ Contains a collection for useful functions and aliases. The files
 
 1. Declare `SHELL_HELPER_LIBRARY` somewhere in your `.bashrc` or `.zshrc`
 
-   ```
+   ```bash
    export SHELL_HELPER_LIBRARY="$HOME\.shell-helper-library
    ```
 
@@ -17,19 +17,20 @@ Contains a collection for useful functions and aliases. The files
    ```bash
    git clone https://gitlab.com/papanito/shell-helper-library $SHELL_HELPER_LIBRARY
    ```
-3. Add the following to your `.bashrc` or `.zshrc`
+
+3. Load functions
+
+   * **ZSH** use a plugin-manager and load the plugin. I use [ZI], hence I have this in my `.zshrc`
+
+     ```bash
+     zi light papanito/shell-helper-library
+     ```
+
+   * **BASH** add ths to `.bash.rc`
 
     ```bash
-    # @description include functions from shell helper library
-    # Clone https://gitlab.com/papanito/shell-helper-library to $SHELL_HELPER_LIBRARY
-    function loadShellHelperLibray()
-    {
-    if [ -n "$SHELL_HELPER_LIBRARY" ] && [ -d "$SHELL_HELPER_LIBRARY" ]; then
-        for filename in $(fine
-        d $SHELL_HELPER_LIBRARY -name "*.sh" ); do
-            source $filename
-        done
-    fi
-    }
-    loadShellHelperLibray
+    shell_helper=$SHELL_HELPER_LIBRARY/shell-helpers.plugin.bash
+    if [ -f $shell_helper ]; then . $shell_helper ; fi
     ```
+
+[ZI]: https://github.com/z-shell/zi
