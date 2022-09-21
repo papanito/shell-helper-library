@@ -33,7 +33,7 @@ Contains a collection for useful functions and aliases. The files
     if [ -f $shell_helper ]; then . $shell_helper ; fi
     ```
 
-[ZI]: https://github.com/z-shell/zi# shell.sh
+[ZI]: https://github.com/z-shell/zi
 
 ## Content
 
