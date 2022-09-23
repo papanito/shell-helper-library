@@ -2,9 +2,20 @@
 
 [![Gitlab issues](https://img.shields.io/gitlab/issues/open-raw/papanito/shell-helper-library)](https://gitlab.com/papanito/shell-helper-library/-/issues) [![Gitlab merge requests](https://img.shields.io/gitlab/merge-requests/open/papanito/shell-helper-library)](https://gitlab.com/papanito/shell-helper-library/-/merge_requests) [![GitLab contributors](https://img.shields.io/gitlab/contributors/papanito/shell-helper-library)](https://img.shields.io/gitlab/contributors/papanito/shell-helper-library) [![GitLab](https://img.shields.io/gitlab/license/papanito/shell-helper-library)](https://img.shields.io/gitlab/license/papanito/shell-helper-library)
 
-Contains a collection for useful functions and aliases. The files
+Contains a collection for useful functions and aliases.
 
 ## Usage
+
+### zsh
+
+Use a plugin-manager and load the plugin. I use [ZI], hence I have this in my `.zshrc`
+
+```bash
+zi ice from"gitlab"
+zi light papanito/shell-helper-library
+```
+
+### bash
 
 1. Declare `SHELL_HELPER_LIBRARY` somewhere in your `.bashrc` or `.zshrc`
 
@@ -18,15 +29,7 @@ Contains a collection for useful functions and aliases. The files
    git clone https://gitlab.com/papanito/shell-helper-library $SHELL_HELPER_LIBRARY
    ```
 
-3. Load functions
-
-   * **ZSH** use a plugin-manager and load the plugin. I use [ZI], hence I have this in my `.zshrc`
-
-     ```bash
-     zi light papanito/shell-helper-library
-     ```
-
-   * **BASH** add ths to `.bash.rc`
+3. Load functions by adding this to `.bashrc`
 
     ```bash
     shell_helper=$SHELL_HELPER_LIBRARY/shell-helpers.plugin.bash
