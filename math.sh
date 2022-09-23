@@ -3,6 +3,19 @@
 
 # @description list of numbers with equal width i.e. number with 0-prefixed
 # @arg $1 int numbers to print
+# @example
+#   sh:nseq 10
+#   00
+#   01
+#   02
+#   03
+#   04
+#   05
+#   06
+#   07
+#   08
+#   09
+#   10
 nseq() {
    seq -w 0 "$1"
 }

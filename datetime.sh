@@ -86,10 +86,10 @@ seconds-convert-part() {
     local unit=$1
     local name=$2
     if [ $unit -ge 2 ]; then
-   echo " ${unit} ${name}s"
+        echo " ${unit} ${name}s"
     elif [ $unit -ge 1 ]; then
-   echo " ${unit} ${name}"
+        echo " ${unit} ${name}"
     else
-   echo ""
+        echo ""
     fi
 }

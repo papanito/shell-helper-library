@@ -5,35 +5,35 @@
 # @description find files with pattern $1 in name and Execute $2 on it
 # @arg $1 string search pattern
 # @arg $2 string command to execute on found files
-find_execute() {
+find::execute() {
    find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;  ;
 }
-alias fe='find_execute'
+alias fe='find::execute'
 
 # @description find files under current directory
 # @arg $1 string search pattern
-find_current() { /usr/bin/find . -name "$@" ; }
-alias fc='find_current'
+find::current() { /usr/bin/find . -name "$@" ; }
+alias fc='find::current'
 
 # @description find files whose name ends with a given string
 # @arg $1 string search pattern
-find_endswith() { /usr/bin/find . -name '*'"$@" ; }
-alias fe='find_endswith'
+find::endswith() { /usr/bin/find . -name '*'"$@" ; }
+alias fe='find::endswith'
 
 # @description find files whose name starts with a given string
 # @arg $1 string search pattern
-find_startwith() { /usr/bin/find . -name "$@"'*' ; }
-alias fs='find_startwith'
+find::startwith() { /usr/bin/find . -name "$@"'*' ; }
+alias fs='find::startwith'
 
 # @description find files larger than a certain size (in bytes)
 # @arg $1 string search pattern
-find_larger() { find . -type f -size +${1}c ; }
-alias fl='find_larger'
+find::larger() { find . -type f -size +${1}c ; }
+alias fl='find::larger'
 
 # @description find a file with a pattern in name in the local directory
 # @arg $1 string search pattern
-find_pattern()   { find . -type f -iname '*'$*'*' -ls ; }
-alias fp='find_pattern'
+find::pattern()   { find . -type f -iname '*'$*'*' -ls ; }
+alias fp='find::pattern'
 
 # @description Find in file and ( AND relation ) 
 # Will search PWD for text files that contain $1 AND $2 AND $3 etc...
@@ -41,19 +41,19 @@ alias fp='find_pattern'
 # @arg $1 string search pattern1
 # @arg $2 string search pattern2
 # @arg $3 string search pattern3 (optional)
-find_and() { (($# < 2)) && { echo "usage: ffa pat1 pat2 [...]" >&2; return 1; };awk "/$1/$(printf "&&/%s/" "${@:2}")"'{ print FILENAME ":" $0 }' *; }
-alias ffa='find_and'
+find::and() { (($# < 2)) && { echo "usage: ffa pat1 pat2 [...]" >&2; return 1; };awk "/$1/$(printf "&&/%s/" "${@:2}")"'{ print FILENAME ":" $0 }' *; }
+alias ffa='find::and'
 
 # @description tgrep through files found by find, e.g. grepf pattern '*.c'
 # note that 'grep -r pattern dir_name' is an alternative if want all files
 # @arg $1 string search pattern for find
 # @arg $2 string search pattern for grep
-grepfind() { find . -type f -name "$2" -print0 | xargs -0 grep "$1" ; }
+find::grep() { find . -type f -name "$2" -print0 | xargs -0 grep "$1" ; }
 
 # @description find pattern in a set of files and highlight them
 # @arg $1 string search pattern for grep
 # @arg $2 string search pattern for find
-fstr() {
+find:str() {
     OPTIND=1
     local case=""
     local usage="fstr: find string in files.
@@ -84,4 +84,4 @@ grip() {
 
 # @description who is the newest file in a directory
 # @arg $1 string folder to search in (defaults to .)
-newest() { find ${1:-\.} -type f |xargs ls -lrt ; }
+find::newest() { find ${1:-\.} -type f |xargs ls -lrt ; }

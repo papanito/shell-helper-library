@@ -47,8 +47,3 @@ define a word
 ```bash
 define dog
 ```
-
-### detectlanguage
-
-detect language of a string
-

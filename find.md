@@ -6,19 +6,19 @@ Functions and aliases to find files
 
 ## Index
 
-* [find_execute](#find_execute)
-* [find_current](#find_current)
-* [find_endswith](#find_endswith)
-* [find_startwith](#find_startwith)
-* [find_larger](#find_larger)
-* [find_pattern](#find_pattern)
-* [find_and](#find_and)
-* [grepfind](#grepfind)
-* [fstr](#fstr)
+* [find::execute](#findexecute)
+* [find::current](#findcurrent)
+* [find::endswith](#findendswith)
+* [find::startwith](#findstartwith)
+* [find::larger](#findlarger)
+* [find::pattern](#findpattern)
+* [find::and](#findand)
+* [find::grep](#findgrep)
+* [find:str](#findstr)
 * [grip](#grip)
-* [newest](#newest)
+* [find::newest](#findnewest)
 
-### find_execute
+### find::execute
 
 find files with pattern $1 in name and Execute $2 on it
 
@@ -27,7 +27,7 @@ find files with pattern $1 in name and Execute $2 on it
 * **$1** (string): search pattern
 * **$2** (string): command to execute on found files
 
-### find_current
+### find::current
 
 find files under current directory
 
@@ -35,7 +35,7 @@ find files under current directory
 
 * **$1** (string): search pattern
 
-### find_endswith
+### find::endswith
 
 find files whose name ends with a given string
 
@@ -43,7 +43,7 @@ find files whose name ends with a given string
 
 * **$1** (string): search pattern
 
-### find_startwith
+### find::startwith
 
 find files whose name starts with a given string
 
@@ -51,7 +51,7 @@ find files whose name starts with a given string
 
 * **$1** (string): search pattern
 
-### find_larger
+### find::larger
 
 find files larger than a certain size (in bytes)
 
@@ -59,7 +59,7 @@ find files larger than a certain size (in bytes)
 
 * **$1** (string): search pattern
 
-### find_pattern
+### find::pattern
 
 find a file with a pattern in name in the local directory
 
@@ -67,7 +67,7 @@ find a file with a pattern in name in the local directory
 
 * **$1** (string): search pattern
 
-### find_and
+### find::and
 
 Find in file and ( AND relation ) 
 Will search PWD for text files that contain $1 AND $2 AND $3 etc...
@@ -79,7 +79,7 @@ Actually it does the same as grep word1|grep word2|grep word3 etc, but in a more
 * **$2** (string): search pattern2
 * **$3** (string): search pattern3 (optional)
 
-### grepfind
+### find::grep
 
 tgrep through files found by find, e.g. grepf pattern '*.c'
 note that 'grep -r pattern dir_name' is an alternative if want all files
@@ -89,7 +89,7 @@ note that 'grep -r pattern dir_name' is an alternative if want all files
 * **$1** (string): search pattern for find
 * **$2** (string): search pattern for grep
 
-### fstr
+### find:str
 
 find pattern in a set of files and highlight them
 
@@ -106,7 +106,7 @@ searches through the text of all the files in your current directory, see http:/
 
 * **$1** (string): search pattern for grep
 
-### newest
+### find::newest
 
 who is the newest file in a directory
 

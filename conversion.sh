@@ -495,7 +495,7 @@ dec2text() {
 # @example
 #   dec2text 1234 -> one two three four
 # @arg $1 int value to convert to string
-dec2text_() { 
+dec2eng2() { 
    # This script is part of nixCraft shell script collection (NSSC)
    # Visit http://bash.cyberciti.biz/ for more information.
    n=$1

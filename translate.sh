@@ -46,14 +46,3 @@ define() {
    rm -f /tmp/define
    return 0
 }
-
-# @description detect language of a string
-detectlanguage() { 
-   curl -s "http://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q=$@" | sed 's/{"responseData": {"language":"\([^"]*\)".*/\1\n/'; 
-}
-
-
-# Google text-to-speech in mp3/wav format
-say() { 
-   mplayer -user-agent Mozilla "http://translate.google.com/translate_tts?tl=en&q=$(echo $* | sed 's#\ #\+#g')" > /dev/null 2>&1 ;
-}
