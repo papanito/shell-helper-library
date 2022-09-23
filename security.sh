@@ -30,11 +30,11 @@ sitepass2() {
 # @description helper functions for encryption and decryption
 
 # @description More advanced encryption / decryption
+# Author: Martin Langasek <cz4160@gmail.com>
 # @example
 #  encrypt filename
 #  decrypt filename
 encrypt() {
-   # Author: Martin Langasek <cz4160@gmail.com>
    case $LANG in
      * )
       err_title="Error"
@@ -102,14 +102,14 @@ rot47() {
 # @description OpenPGP/GPG pubkeys stuff (for Launchpad / etc.
 
 # @description to export public OpenPGP keys to a file for safe keeping and potential restoration
-exportmykeys() 
+gpg:exportmykeys() 
 { 
-   exportmykeys_private && exportmykeys_public
+   gpg:exportmykeys_private && gpg:exportmykeys_public
 }
 
 # @description to export private OpenPGP keys to a file for safe keeping and potential restoration
 # using 'mykeys', put the appropriate GPG key after you type this function
-exportmykeys_private() {
+gpg:exportmykeys_private() {
    gpg --list-secret-keys
    echo -n "Please enter the appropriate private key...
    Look for the line that starts something like "sec 1024D/".
@@ -124,7 +124,7 @@ exportmykeys_private() {
 
 # @description to export public OpenPGP keys to a file for safe keeping and potential restoration
 # using 'mykeys', put the appropriate GPG key after you type this function
-exportmykeys_public() {
+gpg:exportmykeys_public() {
    gpg --list-keys
    echo -n "Please enter the appropriate public key...
    Look for line that starts something like "pub 1024D/".
@@ -138,17 +138,17 @@ exportmykeys_public() {
 }
 
 # to get the new key fingerprint for use in the appropriate section on Launchpad.net to start verification process
-alias gpg_fingerprintmykeys='gpg --fingerprint'
+alias gpg:fingerprintmykeys='gpg --fingerprint'
 
 # to get a list of your public and private OpenPGP/GPG pubkeys
-alias gpg_mykeys='gpg --list-keys && gpg --list-secret-keys'
+alias gpg:mykeys='gpg --list-keys && gpg --list-secret-keys'
 
 # publish newly-created mykeys for use on Launchpad / etc.
-alias gpg_publishmykeys='gpg --keyserver hkp://keyserver.ubuntu.com --send-keys'
+alias gpg:publishmykeys='gpg --keyserver hkps://keys.openpgp.org --send-keys'
 
 # @description to restore your public and private OpenPGP keys
-# from Public_Key-public.key and Private_Keys-private.key files:
-gpg_restoremykeys() {
+# from Public_Key-public.key and Private_Keys-private.key files
+gpg:restoremykeys() {
    echo -n "Please enter the full path to Public keys (spaces are fine)...
 
    Example: '/home/(your username)/Public_Key-public.key'...
