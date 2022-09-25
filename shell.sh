@@ -1,310 +1,12 @@
 # @file shell.sh
 # @description helper functions for the work in the terminal
 
-# @description declare array `c` with pre-defined colors
-# shamelessly copied from https://github.com/zpm-zsh/colors/blob/master/colors.plugin.zsh
-# @noargs
-defineColors() {
-   if [[ -z "$NO_COLOR" && "$CLICOLOR" != 0 ]]; then
-      export CLICOLOR=1
-      typeset -Ag c
-      if [ -n "$ZSH_VERSION" ]; then
-         c=(
-            reset '[0m'
+# @section common helpers
+# @description common helper functions to work with scripts
 
-            bold '[0m'
-            dim '[2m'
-            coursive '[3m'
-            underline '[4m'
-            blink '[5m'
-            inverse '[7m'
-            hidden '[8m'
-            strike '[9m'
-            double_underline '[4;21m'
-            overline '[53m'
+alias show_aliases='compgen -A alias'      # list bash alias defined in .bash_profile or .bashrc
+alias show_functions='compgen -A function' # list bash functions defined in .bash_profile or .bashrc
 
-            reset_text '[22m'
-            no_coursive '[23m'
-            no_underline '[24m'
-            no_blink '[25m'
-            no_inverse '[27m'
-            no_hidden '[28m'
-            no_strike '[29m'
-
-            default '[39m'
-            base3 '[30m'
-            black '[30m' # Do not use this. Just for compatibility
-            red '[31m'
-            green '[32m'
-            yellow '[33m'
-            blue '[34m'
-            magenta '[35m'
-            cyan '[36m'
-            base0 '[37m'
-            white '[37m' # Do not use this. Just for compatibility
-
-            base2 '[30;90m'
-            grey '[30;90m' # Do not use this. Just for compatibility
-            light_red '[31;91m'
-            light_green '[32;92m'
-            light_yellow '[33;93m'
-            light_blue '[34;94m'
-            light_magenta '[35;95m'
-            light_cyan '[36;96m'
-            base1 '[37;97m'
-            light_grey '[37;97m' # Do not use this. Just for compatibility
-
-            bg_default '[49m'
-            bg_base3 '[40m'
-            bg_black '[40m'
-            bg_red '[41m'
-            bg_green '[42m'
-            bg_yellow '[43m'
-            bg_blue '[44m'
-            bg_magenta '[45m'
-            bg_cyan '[46m'
-            bg_base0 '[47m'
-            bg_white '[47m'
-
-            bg_base2 '[40;100m'
-            bg_grey '[40;100m'
-            bg_light_red '[41;101m'
-            bg_light_green '[42;102m'
-            bg_light_yellow '[43;103m'
-            bg_light_blue '[44;104m'
-            bg_light_magenta '[45;105m'
-            bg_light_cyan '[46;106m'
-            bg_base1 '[47;107m'
-            bg_light_grey '[47;107m'
-
-            raw_reset '0'
-
-            raw_bold '1'
-            raw_dim '2'
-            raw_coursive '3'
-            raw_underline '4'
-            raw_blink '5'
-            raw_inverse '7'
-            raw_hidden '8'
-            raw_strike '9'
-            raw_double_underline '4;21'
-            raw_overline '53'
-
-            raw_reset_text '22'
-            raw_no_coursive '23'
-            raw_no_underline '24'
-            raw_no_blink '25'
-            raw_no_inverse '27'
-            raw_no_hidden '28'
-            raw_no_strike '29'
-
-            raw_default '39'
-            raw_base3 '30'
-            raw_black '30' # Do not use this. Just for compatibility
-            raw_red '31'
-            raw_green '32'
-            raw_yellow '33'
-            raw_blue '34'
-            raw_magenta '35'
-            raw_cyan '36'
-            raw_base0 '37'
-            raw_white '37' # Do not use this. Just for compatibility
-
-            raw_base2 '30;90'
-            raw_grey '30;90' # Do not use this. Just for compatibility
-            raw_light_red '31;91'
-            raw_light_green '32;92'
-            raw_light_yellow '33;93'
-            raw_light_blue '34;94'
-            raw_light_magenta '35;95'
-            raw_light_cyan '36;96'
-            raw_base1 '37;97'
-            raw_light_grey '37;97' # Do not use this. Just for compatibility
-
-            raw_bg_default '49'
-            raw_bg_base3 '40'
-            raw_bg_black '40'
-            raw_bg_red '41'
-            raw_bg_green '42'
-            raw_bg_yellow '43'
-            raw_bg_blue '44'
-            raw_bg_magenta '45'
-            raw_bg_cyan '46'
-            raw_bg_base0 '47'
-            raw_bg_white '47'
-
-            raw_bg_base2 '40;100'
-            raw_bg_grey '40;100'
-            raw_bg_light_red '41;101'
-            raw_bg_light_green '42;102'
-            raw_bg_light_yellow '43;103'
-            raw_bg_light_blue '44;104'
-            raw_bg_light_magenta '45;105'
-            raw_bg_light_cyan '46;106'
-            raw_bg_base1 '47;107'
-            raw_bg_light_grey '47;107'
-         )
-      else
-         c=(
-            [reset]='[0m'
-
-            [bold]='[0m'
-            [dim]='[2m'
-            [coursive]='[3m'
-            [underline]='[4m'
-            [blink]='[5m'
-            [inverse]='[7m'
-            [hidden]='[8m'
-            [strike]='[9m'
-            [double_underline]='[4;21m'
-            [overline]='[53m'
-
-            [reset_text]='[22m'
-            [no_coursive]='[23m'
-            [no_underline]='[24m'
-            [no_blink]='[25m'
-            [no_inverse]='[27m'
-            [no_hidden]='[28m'
-            [no_strike]='[29m'
-
-            [default]='[39m'
-            [base3]='[30m'
-            [black]='[30m' # Do not use this. Just for compatibility
-            [red]='[31m'
-            [green]='[32m'
-            [yellow]='[33m'
-            [blue]='[34m'
-            [magenta]='[35m'
-            [cyan]='[36m'
-            [base0]='[37m'
-            [white]='[37m' # Do not use this. Just for compatibility
-
-            [base2]='[30;90m'
-            [grey]='[30;90m' # Do not use this. Just for compatibility
-            [light_red]='[31;91m'
-            [light_green]='[32;92m'
-            [light_yellow]='[33;93m'
-            [light_blue]='[34;94m'
-            [light_magenta]='[35;95m'
-            [light_cyan]='[36;96m'
-            [base1]='[37;97m'
-            [light_grey]='[37;97m' # Do not use this. Just for compatibility
-
-            [bg_default]='[49m'
-            [bg_base3]='[40m'
-            [bg_black]='[40m'
-            [bg_red]='[41m'
-            [bg_green]='[42m'
-            [bg_yellow]='[43m'
-            [bg_blue]='[44m'
-            [bg_magenta]='[45m'
-            [bg_cyan]='[46m'
-            [bg_base0]='[47m'
-            [bg_white]='[47m'
-
-            [bg_base2]='[40;100m'
-            [bg_grey]='[40;100m'
-            [bg_light_red]='[41;101m'
-            [bg_light_green]='[42;102m'
-            [bg_light_yellow]='[43;103m'
-            [bg_light_blue]='[44;104m'
-            [bg_light_magenta]='[45;105m'
-            [bg_light_cyan]='[46;106m'
-            [bg_base1]='[47;107m'
-            [bg_light_grey]='[47;107m'
-
-            [raw_reset]='0'
-
-            [raw_bold]='1'
-            [raw_dim]='2'
-            [raw_coursive]='3'
-            [raw_underline]='4'
-            [raw_blink]='5'
-            [raw_inverse]='7'
-            [raw_hidden]='8'
-            [raw_strike]='9'
-            [raw_double_underline]='4;21'
-            [raw_overline]='53'
-
-            [raw_reset_text]='22'
-            [raw_no_coursive]='23'
-            [raw_no_underline]='24'
-            [raw_no_blink]='25'
-            [raw_no_inverse]='27'
-            [raw_no_hidden]='28'
-            [raw_no_strike]='29'
-
-            [raw_default]='39'
-            [raw_base3]='30'
-            [raw_black]='30' # Do not use this. Just for compatibility
-            [raw_red]='31'
-            [raw_green]='32'
-            [raw_yellow]='33'
-            [raw_blue]='34'
-            [raw_magenta]='35'
-            [raw_cyan]='36'
-            [raw_base0]='37'
-            [raw_white]='37' # Do not use this. Just for compatibility
-
-            [raw_base2]='30;90'
-            [raw_grey]='30;90' # Do not use this. Just for compatibility
-            [raw_light_red]='31;91'
-            [raw_light_green]='32;92'
-            [raw_light_yellow]='33;93'
-            [raw_light_blue]='34;94'
-            [raw_light_magenta]='35;95'
-            [raw_light_cyan]='36;96'
-            [raw_base1]='37;97'
-            [raw_light_grey]='37;97' # Do not use this. Just for compatibility
-
-            [raw_bg_default]='49'
-            [raw_bg_base3]='40'
-            [raw_bg_black]='40'
-            [raw_bg_red]='41'
-            [raw_bg_green]='42'
-            [raw_bg_yellow]='43'
-            [raw_bg_blue]='44'
-            [raw_bg_magenta]='45'
-            [raw_bg_cyan]='46'
-            [raw_bg_base0]='47'
-            [raw_bg_white]='47'
-
-            [raw_bg_base2]='40;100'
-            [raw_bg_grey]='40;100'
-            [raw_bg_light_red]='41;101'
-            [raw_bg_light_green]='42;102'
-            [raw_bg_light_yellow]='43;103'
-            [raw_bg_light_blue]='44;104'
-            [raw_bg_light_magenta]='45;105'
-            [raw_bg_light_cyan]='46;106'
-            [raw_bg_base1]='47;107'
-            [raw_bg_light_grey]='47;107'
-         )
-      fi
-   else
-      export CLICOLOR=0
-      export NO_COLOR=1
-   fi
-}
-defineColors
-
-alias showallaliases='compgen -A alias'      # list bash alias defined in .bash_profile or .bashrc
-alias showallfunctions='compgen -A function' # list bash functions defined in .bash_profile or .bashrc
-
-# @description Helper function to separate output with a given character
-# @arg $1 string (optional) character for separation, default is `-`
-# @arg $2 int (optional) how much characters to print, default is 80
-text_separator() {
-   ch="-"
-   len="80"
-   if [ "$#" -eq 2 ]; then
-      ch=$1
-   elif [ "$#" -gt 2 ]; then
-      ch=$1
-      len=$2
-   fi
-   printf '%*s\n' "$len" | tr ' ' "$ch"
-}
 
 # @description Helper function to check if a given tool is installed, otherwise die
 # @arg $1 string name of the binary
@@ -323,28 +25,6 @@ apath() {
       PATH=$1:$PATH
    fi
 }
-
-# @description center text in console with simple pipe like
-# @arg $1 string text to print
-align_center() {
-   l="$(cat -)"
-   s=$(echo -e "$l" | wc -L)
-   echo "$l" | while read l; do
-      j=$(((s - ${#l}) / 2))
-      echo "$(while ((--j > 0)); do printf " "; done)$l"
-   done
-} #; ls --color=none / | center
-
-# @description right-align text in console using pipe like ( command | right )
-# @arg $1 string text to print
-align_right() {
-   l="$(cat -)"
-   [ -n "$1" ] && s=$1 || s=$(echo -e "$l" | wc -L)
-   echo "$l" | while read l; do
-      j=$(((s - ${#l})))
-      echo "$(while ((j-- > 0)); do printf " "; done)$l"
-   done
-} #; ls --color=none / | right 150
 
 # @description Set terminal title
 # @arg $1 string title of the terminal
@@ -389,17 +69,6 @@ editcmd() {
    $1 >$2 && $EDITOR $2
 }
 
-# @description Ask user for y/Y
-# @arg $1 string question to display
-ask() {
-   echo -n "$@" '[y/n] '
-   read ans
-   case "$ans" in
-   y* | Y*) return 0 ;;
-   *) return 1 ;;
-   esac
-}
-
 # @description Repeats a command every x seconds
 # @arg $1 int PERIOD in s after COMMAND is executed
 # @arg $2 string COMMAND to be executed
@@ -410,6 +79,58 @@ repeatcmd() {
       eval "$@";
       sleep $period;
    done
+}
+
+# @section text formation
+# @description format test in the console
+
+# @description center text in console with simple pipe like
+# @arg $1 string text to print
+align_center() {
+   l="$(cat -)"
+   s=$(echo -e "$l" | wc -L)
+   echo "$l" | while read l; do
+      j=$(((s - ${#l}) / 2))
+      echo "$(while ((--j > 0)); do printf " "; done)$l"
+   done
+} #; ls --color=none / | center
+
+# @description right-align text in console using pipe like ( command | right )
+# @arg $1 string text to print
+align_right() {
+   l="$(cat -)"
+   [ -n "$1" ] && s=$1 || s=$(echo -e "$l" | wc -L)
+   echo "$l" | while read l; do
+      j=$(((s - ${#l})))
+      echo "$(while ((j-- > 0)); do printf " "; done)$l"
+   done
+} #; ls --color=none / | right 150
+
+# @description Helper function to separate output with a given character
+# @arg $1 string (optional) character for separation, default is `-`
+# @arg $2 int (optional) how much characters to print, default is 80
+text_separator() {
+   ch="-"
+   len="80"
+   if [ "$#" -eq 2 ]; then
+      ch=$1
+   elif [ "$#" -gt 2 ]; then
+      ch=$1
+      len=$2
+   fi
+   printf '%*s\n' "$len" | tr ' ' "$ch"
+}
+
+
+# @description Ask user for y/Y
+# @arg $1 string question to display
+ask() {
+   echo -n "$@" '[y/n] '
+   read ans
+   case "$ans" in
+   y* | Y*) return 0 ;;
+   *) return 1 ;;
+   esac
 }
 
 # @description outputs dots every second until command completes
@@ -608,7 +329,7 @@ spinner2() {
 # @description colorize message in shell
 # @arg $1 string text to colorize
 colormsg() {
-   [ -n "$1" ] && echo -en "${c[color]}${@}${c[reset]}"
+   [ -n "$1" ] && echo -en "${c[$color]}${@}${c[reset]}"
 }
 
 # @description colorize and display error message in shell

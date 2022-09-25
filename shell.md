@@ -6,20 +6,19 @@ helper functions for the work in the terminal
 
 ## Index
 
-* [defineColors](#definecolors)
-* [text_separator](#text_separator)
 * [need](#need)
 * [apath](#apath)
-* [align_center](#align_center)
-* [align_right](#align_right)
 * [terminal_title](#terminal_title)
 * [xtitle](#xtitle)
 * [open](#open)
 * [daemon](#daemon)
 * [die](#die)
-* [vimcmd](#vimcmd)
+* [editcmd](#editcmd)
+* [repeatcmd](#repeatcmd)
+* [align_center](#align_center)
+* [align_right](#align_right)
+* [text_separator](#text_separator)
 * [ask](#ask)
-* [repeat](#repeat)
 * [progress](#progress)
 * [progressbar](#progressbar)
 * [spanner](#spanner)
@@ -42,26 +41,10 @@ helper functions for the work in the terminal
 * [colors2](#colors2)
 * [remindme](#remindme)
 * [errormsg](#errormsg)
-* [hgrepl](#hgrepl)
-* [hgrep](#hgrep)
-* [hhgrep](#hhgrep)
-* [histtop](#histtop)
 
-### defineColors
+## common helpers
 
-declare array `c` with pre-defined colors
-shamelessly copied from https://github.com/zpm-zsh/colors/blob/master/colors.plugin.zsh
-
-_Function has no arguments._
-
-### text_separator
-
-Helper function to separate output with a given character
-
-#### Arguments
-
-* **$1** (string): (optional) character for separation, default is `-`
-* **$2** (int): (optional) how much characters to print, default is 80
+common helper functions to work with scripts
 
 ### need
 
@@ -79,22 +62,6 @@ Temporarily add to PATH
 #### Arguments
 
 * **$1** (string): path to add
-
-### align_center
-
-center text in console with simple pipe like
-
-#### Arguments
-
-* **$1** (string): text to print
-
-### align_right
-
-right-align text in console using pipe like ( command | right )
-
-#### Arguments
-
-* **$1** (string): text to print
 
 ### terminal_title
 
@@ -132,9 +99,47 @@ Super stealth background launch
 
 Shell function to exit script with error in exit status and print optional message to stderr
 
-### vimcmd
+### editcmd
 
-Run a command, redirecting output to a file, then edit the file with vim
+Run a command, redirecting output to a file, then edit the file with $EDITOR
+
+### repeatcmd
+
+Repeats a command every x seconds
+
+#### Arguments
+
+* **$1** (int): PERIOD in s after COMMAND is executed
+* **$2** (string): COMMAND to be executed
+
+## text formation
+
+format test in the console
+
+### align_center
+
+center text in console with simple pipe like
+
+#### Arguments
+
+* **$1** (string): text to print
+
+### align_right
+
+right-align text in console using pipe like ( command | right )
+
+#### Arguments
+
+* **$1** (string): text to print
+
+### text_separator
+
+Helper function to separate output with a given character
+
+#### Arguments
+
+* **$1** (string): (optional) character for separation, default is `-`
+* **$2** (int): (optional) how much characters to print, default is 80
 
 ### ask
 
@@ -143,15 +148,6 @@ Ask user for y/Y
 #### Arguments
 
 * **$1** (string): question to display
-
-### repeat
-
-Repeats a command every x seconds
-
-#### Arguments
-
-* **$1** (int): PERIOD in s after COMMAND is executed
-* **$2** (string): COMMAND to be executed
 
 ### progress
 
@@ -336,36 +332,4 @@ trap errormsg  SIGINT SIGTERM ERR
 #### Arguments
 
 * **$1** (string): error message to show
-
-## Bash History
-
-Helper functions for bash history
-
-### hgrepl
-
-search bash history using sed
-
-#### Arguments
-
-* **$1** (string): search pattern
-
-### hgrep
-
-search bash history using sed
-
-#### Arguments
-
-* **$1** (string): search pattern
-
-### hhgrep
-
-search bash history using sed
-
-#### Arguments
-
-* **$1** (string): search pattern
-
-### histtop
-
-Analyze your bash usage
 
