@@ -26,6 +26,12 @@ apath() {
    fi
 }
 
+# Edit your history file
+he() {
+   history -a
+   $EDITOR $HISTFILE history -r
+}
+
 # @description Set terminal title
 # @arg $1 string title of the terminal
 terminal_title() {
@@ -358,8 +364,9 @@ warning() {
 
 # @description colorize and display message in shell
 # @arg $1 string text to colorize
+# @arg $2 name of the color
 mesg() {
-   echo -e "${c[msg]}[ m ] $@ ${c[reset]}"
+   echo -e "${c[$color]}[ m ] $@ ${c[reset]}"
 }
 
 # @description Extract a particular column of space-separated output
@@ -368,11 +375,6 @@ mesg() {
 # lsof | getcolumn 0 | sort | uniq
 getcolumn() {
    perl -ne '@cols = split; print "$cols['$1']\n"'
-}
-
-# @description Surround lines with quotes (useful in pipes) - from mervTormel
-enquote() {
-   /usr/bin/sed 's/^/"/;s/$/"/'
 }
 
 # @description ruler that stretches across the terminal
@@ -390,114 +392,6 @@ err() {
    if [ "${?}" != 0 ]; then
       echo "Not found."
    fi
-}
-
-# @section colors
-# @description work with colors on the terminal
-
-# @description print all 256 colors for testing TERM or for a quick reference
-# show numerical values for each of the 256 colors in bash
-colors2nums() {
-   for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done
-}
-
-# @description show color for given number
-# @arg $1 int value of the color to show
-getColor() {
-   echo -e "\e[38;05;$1mColor"
-}
-
-# @description takes a name of a color and some text and then echoes out the text in the named color
-# @example
-# colorize_text "color" "whatever text"
-colorize-text() {
-   b='[0;30m'
-   # Implement command-line options
-   while getopts "nr" opt; do
-      case $opt in
-      n) o='-n' ;;
-      r) b='' ;;
-      esac
-   done
-   shift $(($OPTIND - 1))
-   # Set variables
-   col=$1
-   shift
-   text="$*"
-   # Set a to console color code
-   case $col in
-   'black') a='[0;30m' ;;
-   'blue') a='[0;34m' ;;
-   'green') a='[0;32m' ;;
-   'cyan') a='[0;36m' ;;
-   'red') a='[0;31m' ;;
-   'purple') a='[0;35m' ;;
-   'brown') a='[0;33m' ;;
-   'ltgray') a='[0;37m' ;;
-   'white') a='[1;30m' ;;
-   'ltblue') a='[1;34m' ;;
-   'ltgreen') a='[1;32m' ;;
-   'ltcyan') a='[1;36m' ;;
-   'ltred') a='[1;31m' ;;
-   'pink') a='[1;35m' ;;
-   'yellow') a='[1;33m' ;;
-   'gray') a='[1;37m' ;;
-   esac
-   # Display text in designated color, no newline
-   echo -en "\033$a$text"
-   # If 'b' switch not on, restore color to black
-   if [ -n $b ]; then
-      echo -en "\033$b"
-   fi
-   # If 'n' switch on, do not display final newline
-   # otherwise output newline
-   echo $o
-}
-
-# @description displays all 256 possible background colors, using ANSI escape sequences.
-# author: Chetankumar Phulpagare
-# used in ABS Guide with permission.
-colors2() {
-   T1=8
-   T2=6
-   T3=36
-   offset=0
-   for num1 in {0..7}; do
-      {
-         for num2 in {0,1}; do
-            {
-               shownum=$(echo "$offset + $T1 * ${num2} + $num1" | bc)
-               echo -en "\E[0;48;5;${shownum}m color ${shownum} \E[0m"
-            }
-         done
-         echo
-      }
-   done
-   offset=16
-   for num1 in {0..5}; do
-      {
-         for num2 in {0..5}; do
-            {
-               for num3 in {0..5}; do
-                  {
-                     shownum=$(echo "$offset + $T2 * ${num3} \
-              + $num2 + $T3 * ${num1}" | bc)
-                     echo -en "\E[0;48;5;${shownum}m color ${shownum} \E[0m"
-                  }
-               done
-               echo
-            }
-         done
-      }
-   done
-   offset=232
-   for num1 in {0..23}; do
-      {
-         shownum=$(expr $offset + $num1)
-         echo -en "\E[0;48;5;${shownum}m ${shownum}\E[0m"
-      }
-   done
-   echo
 }
 
 # @section UI enhancements
@@ -523,14 +417,12 @@ errormsg() {
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-
-# Edit your history file
-he() {
-   history -a
-   $EDITOR $HISTFILE history -r
-}
-
 # @section pipe helper
 # @description helper functions to use with pipes
 
 alias counts='sort | uniq -c | sort -nr' # a nice command for summarising .mded information
+
+# @description Surround lines with quotes (useful in pipes) - from mervTormel
+enquote() {
+   /usr/bin/sed 's/^/"/;s/$/"/'
+}
