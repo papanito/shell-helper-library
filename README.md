@@ -8,7 +8,7 @@ Contains a collection for useful functions and aliases.
 
 ### zsh
 
-Use a plugin-manager and load the plugin. I use [ZI], hence I have this in my `.zshrc`
+Use a plugin-manager and load the plugin. I use [zinit], hence I have this in my `.zshrc`
 
 ```bash
 zi ice from"gitlab"
@@ -36,7 +36,7 @@ zi light papanito/shell-helper-library
     if [ -f $shell_helper ]; then . $shell_helper ; fi
     ```
 
-[ZI]: https://github.com/z-shell/zi
+[zinit]: https://github.com/zdharma-continuum/zinit
 
 ## Content
 
